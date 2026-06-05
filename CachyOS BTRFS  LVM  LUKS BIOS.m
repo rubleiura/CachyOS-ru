@@ -1368,7 +1368,11 @@ systemctl enable snapper-timeline.timer snapper-cleanup.timer
 systemctl enable  paccache.timer
 
 # 🔹 Активация темы Grub
-sed -i 's|^#*GRUB_THEME=.*|GRUB_THEME="/usr/share/grub/themes/cachyos/theme.txt"|' /etc/default/grub
+cp -r /usr/share/grub/themes/cachyos /boot/grub/themes/
+sed -i 's|^#*GRUB_THEME=.*|GRUB_THEME="/boot/grub/themes/cachyos/theme.txt"|' /etc/default/grub
+# Заменяем или добавляем строку GRUB_ENABLE_CRYPTODISK=y
+sed -i 's|^#*GRUB_ENABLE_CRYPTODISK=.*|GRUB_ENABLE_CRYPTODISK=y|' /etc/default/grub
+grep -q '^GRUB_ENABLE_CRYPTODISK=' /etc/default/grub || echo 'GRUB_ENABLE_CRYPTODISK=y' | sudo tee -a /etc/default/grub > /dev/null
 
 # 🎬 PLYMOUTH (Анимация загрузки)
 plymouth-set-default-theme -R cachyos
