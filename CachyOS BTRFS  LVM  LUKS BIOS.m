@@ -1118,6 +1118,18 @@ sed -i 's|^GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 
 sed -i "s|^GRUB_CMDLINE_LINUX=.*|GRUB_CMDLINE_LINUX=\"cryptdevice=UUID=${CRYPT_UUID}:cryptlvm root=UUID=${ROOT_UUID} resume=UUID=${SWAP_UUID}\"|" /etc/default/grub
 # 📋 Настройка отображения Grub
 sed -i 's|^#*GRUB_DISTRIBUTOR=.*|GRUB_DISTRIBUTOR="CachyOS"|' /etc/default/grub
+# 📋 Добавление пунктов меню включение и перезагрузка системы 
+sudo tee -a /etc/grub.d/40_custom << 'EOF'
+
+menuentry "Выключение системы" {
+    halt
+}
+
+menuentry "Перезагрузка системы" {
+    reboot
+}
+EOF
+
 # 📋 GRUB_ENABLE_CRYPTODISK — ОТКЛЮЧЕН
 # Для BIOS с отдельным /boot это не требуется.
 sed -i 's|^GRUB_ENABLE_CRYPTODISK=.*|#GRUB_ENABLE_CRYPTODISK=y|' /etc/default/grub
