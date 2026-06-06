@@ -1073,7 +1073,7 @@ sed -i "s|^GRUB_CMDLINE_LINUX=.*|GRUB_CMDLINE_LINUX=\"resume=UUID=${SWAP_UUID}\"
 # 📋 Настройка отображения Grub
 sed -i 's|^#*GRUB_DISTRIBUTOR=.*|GRUB_DISTRIBUTOR="CachyOS"|' /etc/default/grub
 # 📋 Добавление пунктов меню включение и перезагрузка системы 
-sudo tee -a /etc/grub.d/40_custom << 'EOF'
+tee -a /etc/grub.d/40_custom << 'EOF'
 
 menuentry "Выключение системы" {
     halt
