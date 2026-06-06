@@ -1110,7 +1110,7 @@ sed -i 's|^# GRUB_ENABLE_CRYPTODISK=.*|GRUB_ENABLE_CRYPTODISK=y|' /etc/default/g
 # 📋 Настройка отображения Grub
 sed -i 's|^#*GRUB_DISTRIBUTOR=.*|GRUB_DISTRIBUTOR="CachyOS"|' /etc/default/grub
 # 📋 Добавление пунктов меню включение и перезагрузка системы 
-sudo tee -a /etc/grub.d/40_custom << 'EOF'
+tee -a /etc/grub.d/40_custom << 'EOF'
 
 menuentry "Выключение системы" {
     halt
